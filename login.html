@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-name">
+            <img src="assets/vishwanoids logo.jpg" alt="logo" class="logo">
+            <p class="name">Vishwanoids</p>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-icon">Home</a>
+            <a href="registration.html" class="nav-icon">Register/login</a>
+            <a href="about.html" class="nav-icon">About</a>
+            <a href="visionMission.html" class="nav-icon">Vision & Mission</a>
+            <a href="events.html" class="nav-icon">Events</a>
+        </nav>
+    </header>
+
+    <video autoplay muted loop class="bg-video">
+        <source src="assets/228947_large.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="form-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" placeholder="Enter your username">
+                <div class="error" id="loginUsernameError">Username is invalid</div>
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+                <div class="error" id="loginPasswordError">Password is invalid</div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn">Login</button>
+                <button type="reset" class="btn">Reset</button>
+                <button type="button" class="btn" id="register">Register</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@vishwanoids.com</p>
+            <p>Follow us on social media!</p>
+            <a
+                href="https://www.instagram.com/vishwanoids_vitpune?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">instagram</a>
+        </section>
+
+        <p class="copyright">&copy; 2025 Vishwanoids Robotics Club</p>
+    </footer>
+
+    <script>
+        function redirectToLogin() {
+            window.location.href = 'registration.html';
+        }
+        function redirectToAdmin() {
+            window.location.href = 'admin.html';
+        }
+
+        document.getElementById('register').addEventListener('click', function () {
+            setTimeout(redirectToLogin, 1000);
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let isValid = true;
+            const username = localStorage.getItem('username');
+            const password = localStorage.getItem('password');
+
+            // Validate username
+            if (document.getElementById('loginUsername').value.trim() === username || document.getElementById('loginUsername').value.trim() === "sanket") {
+                document.getElementById('loginUsernameError').style.display = 'none';
+            } else {
+                isValid = false;
+                document.getElementById('loginUsernameError').style.display = 'block';
+            }
+
+            // Validate password
+            if (document.getElementById('loginPassword').value.trim() === password || document.getElementById('loginPassword').value.trim() === "sanket123") {
+                document.getElementById('loginPasswordError').style.display = 'none';
+            } else {
+                isValid = false;
+                document.getElementById('loginPasswordError').style.display = 'block';
+            }
+
+            if (isValid) {
+                if (document.getElementById('loginUsername').value.trim() === "sanket" && document.getElementById('loginPassword').value.trim() === "sanket123") {
+                    setTimeout(redirectToAdmin, 1000);
+                    return;
+                }
+                alert('Login successful!');
+            }
+        });
+    </script>
+</body>
+
+</html>

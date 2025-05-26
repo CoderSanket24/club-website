@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-name">
+            <img src="assets/vishwanoids logo.jpg" alt="logo" class="logo">
+            <p class="name">Vishwanoids</p>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-icon">Home</a>
+            <a href="registration.html" class="nav-icon">Register/login</a>
+            <a href="about.html" class="nav-icon">About</a>
+            <a href="visionMission.html" class="nav-icon">Vision & Mission</a>
+            <a href="events.html" class="nav-icon">Events</a>
+        </nav>
+    </header>
+
+    <video autoplay muted loop class="bg-video">
+        <source src="assets/228947_large.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="form-container">
+        <h2>Register</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="name" placeholder="Choose a username">
+                <div class="error" id="usernameError">Username is required</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="user_email" placeholder="Enter your email">
+                <div class="error" id="emailError">Valid email is required</div>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number">
+                <div class="error" id="mobileError">Valid 10-digit mobile number required</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Create a password">
+                <div class="error" id="passwordError">Password must be at least 6 characters</div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
+                <div class="error" id="confirmPasswordError">Passwords must match</div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="13" max="120">
+                <div class="error" id="ageError">Age must be between 13 and 120</div>
+            </div>
+
+            <div class="radio-group">
+                <label>Gender:</label>
+                <div class="radio-option">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Other</label>
+                </div>
+                <div class="error" id="genderError">Please select a gender</div>
+            </div>
+
+            <div class="form-group">
+                <label for="domain">Domain:</label>
+                <select id="domain" name="domain">
+                    <option value="">Select your domain</option>
+                    <option value="software">Software</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="hardware">Hardware</option>
+                    <option value="CAD">CAD</option>
+                </select>
+                <div class="error" id="domainError">Please select a domain</div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn">Register</button>
+                <button type="reset" class="btn">Reset</button>
+                <button type="button" class="btn" id="login">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@vishwanoids.com</p>
+            <p>Follow us on social media!</p>
+            <a
+                href="https://www.instagram.com/vishwanoids_vitpune?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">instagram</a>
+        </section>
+
+        <p class="copyright">&copy; 2025 Vishwanoids Robotics Club</p>
+    </footer>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "-YwoIE9CgYDOL5VCn",
+            });
+        })();
+    </script>
+    <script >
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('login').addEventListener('click', function () {
+            setTimeout(redirectToLogin, 1000);
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let isValid = true;
+
+            // Username validation
+            const username = document.getElementById('username');
+            if (username.value.trim() === '') {
+                document.getElementById('usernameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('usernameError').style.display = 'none';
+            }
+
+            // Email validation
+            const email = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            // Mobile number validation (10 digits)
+            const mobile = document.getElementById('mobile');
+            const mobileRegex = /^\d{10}$/;
+            if (!mobileRegex.test(mobile.value.trim())) {
+                document.getElementById('mobileError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('mobileError').style.display = 'none';
+            }
+
+            // Password validation
+            const password = document.getElementById('password');
+            if (password.value.length < 6) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+
+            // Confirm password validation
+            const confirmPassword = document.getElementById('confirmPassword');
+            if (confirmPassword.value !== password.value) {
+                document.getElementById('confirmPasswordError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('confirmPasswordError').style.display = 'none';
+            }
+
+            // Age validation
+            const age = document.getElementById('age');
+            if (age.value < 13 || age.value > 120 || !age.value) {
+                document.getElementById('ageError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('ageError').style.display = 'none';
+            }
+
+            // Gender validation
+            const genderSelected = document.querySelector('input[name="gender"]:checked');
+            if (!genderSelected) {
+                document.getElementById('genderError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('genderError').style.display = 'none';
+            }
+
+            // Domain validation
+            const domain = document.getElementById('domain');
+            if (domain.value === '') {
+                document.getElementById('domainError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('domainError').style.display = 'none';
+            }
+
+            if (isValid) {
+                alert('Registration successful!');
+
+                // Collect all form data
+                const formData = {
+                    username: username.value,
+                    email: email.value,
+                    mobile: mobile.value,
+                    age: age.value,
+                    gender: genderSelected.value,
+                    domain: domain.value
+                };
+                console.log('Form data:', formData);
+
+                localStorage.setItem('username', username.value);
+                localStorage.setItem('password', password.value);
+
+                emailjs.send("service_o365c1n", "template_txjg217", {
+                    name: "vishwanoids",
+                    user_email: email.value,
+                    username: username.value,
+                }).then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Registration successful! A confirmation email has been sent.');
+                    setTimeout(redirectToLogin, 1000);
+                }, function (error) {
+                    console.log('FAILED...', error);
+                    alert('Registration successful! But failed to send confirmation email.');
+                    setTimeout(redirectToLogin, 1000);
+                });
+
+            }
+        });
+    </script>
+</body>
+
+</html>

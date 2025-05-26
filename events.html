@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>events</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-name">
+            <img src="assets/vishwanoids logo.jpg" alt="logo" class="logo">
+            <p class="name">Vishwanoids</p>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-icon">Home</a>
+            <a href="registration.html" class="nav-icon">Register/login</a>
+            <a href="about.html" class="nav-icon">About</a>
+            <a href="visionMission.html" class="nav-icon">Vision & Mission</a>
+            <a href="events.html" class="nav-icon">Events</a>
+        </nav>
+    </header>
+
+    <video autoplay muted loop class="bg-video">
+        <source src="assets/228947_large.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <section id="events">
+        <h2>Our Events</h2>
+        <ul>
+            <li>Robocon Participation</li>
+            <li>Annual Tech Fest</li>
+            <li>Workshops and Seminars</li>
+        </ul>
+        <div class="event-container">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <div class="card-front">
+                    <img src="assets/ait.jpg" alt="Tech Fest">
+                </div>
+                <div class="card-back">
+                    <h3>Annual Tech Fest</h3>
+                    <p>Join us for workshops, competitions, and tech exhibitions.</p>
+                    <p class="event-date">October 5-7, 2024</p>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="card-front">
+                    <img src="assets/axis.jpg" alt="Tech Fest">
+                </div>
+                <div class="card-back">
+                    <h3>Annual Tech Fest</h3>
+                    <p>Join us for workshops, competitions, and tech exhibitions.</p>
+                    <p class="event-date">October 5-7, 2024</p>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="card-front">
+                    <img src="assets/iitg.jpg" alt="Tech Fest">
+                </div>
+                <div class="card-back">
+                    <h3>Annual Tech Fest</h3>
+                    <p>Join us for workshops, competitions, and tech exhibitions.</p>
+                    <p class="event-date">October 5-7, 2024</p>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="card-front">
+                    <img src="assets/iitg2.jpg" alt="Tech Fest">
+                </div>
+                <div class="card-back">
+                    <h3>Annual Tech Fest</h3>
+                    <p>Join us for workshops, competitions, and tech exhibitions.</p>
+                    <p class="event-date">October 5-7, 2024</p>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="card-front">
+                    <img src="assets/jecrc.jpg" alt="Tech Fest">
+                </div>
+                <div class="card-back">
+                    <h3>Annual Tech Fest</h3>
+                    <p>Join us for workshops, competitions, and tech exhibitions.</p>
+                    <p class="event-date">October 5-7, 2024</p>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="card-front">
+                    <img src="assets/jecrc2.jpg" alt="Tech Fest">
+                </div>
+                <div class="card-back">
+                    <h3>Annual Tech Fest</h3>
+                    <p>Join us for workshops, competitions, and tech exhibitions.</p>
+                    <p class="event-date">October 5-7, 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@vishwanoids.com</p>
+            <p>Follow us on social media!</p>
+            <a
+                href="https://www.instagram.com/vishwanoids_vitpune?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">instagram</a>
+        </section>
+
+        <p class="copyright">&copy; 2025 Vishwanoids Robotics Club</p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $('.event-card').hover(
+                // Mouse enter
+                function () {
+                    $(this).find('.card-front').css('transform', 'rotateY(180deg)');
+                    $(this).find('.card-back').css('transform', 'rotateY(0deg)');
+                },
+                // Mouse leave
+                function () {
+                    $(this).find('.card-front').css('transform', 'rotateY(0deg)');
+                    $(this).find('.card-back').css('transform', 'rotateY(180deg)');
+                }
+            );
+        });
+    </script>
+</body>
+
+</html>

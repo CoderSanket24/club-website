@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Club Members</title>
+    <style>
+        body {
+            background-color: #0d001a;
+            color: #00FFFF;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            text-shadow: 0 0 10px #00FFFF;
+        }
+
+        /* Add Member Form */
+        .form-container {
+            background-color: #1a0026;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px #00FFFF;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 95%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: #0d001a;
+            color: #fff;
+            box-shadow: inset 0 0 5px #00FFFF;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #FF1493;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: linear-gradient(to right, #00FFFF, #FF1493);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 15px #FF1493;
+            color: #fff;
+        }
+
+        /* Members Table */
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background-color: #1a0026;
+            box-shadow: 0 0 20px #00FFFF;
+        }
+
+        .members-table th,
+        .members-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #00FFFF;
+        }
+
+        .members-table th {
+            background-color: #0d001a;
+        }
+
+        .delete-btn {
+            background: linear-gradient(to right, #FF1493, #9400D3);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            box-shadow: 0 0 10px #FF1493;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Club Members Admin Panel</h1>
+
+        <!-- Add Member Form -->
+        <div class="form-container">
+            <h2>Add New Member</h2>
+            <form id="addMemberForm">
+                <div class="form-group">
+                    <label for="memberName">Name:</label>
+                    <input type="text" id="memberName" required>
+                </div>
+                <div class="form-group">
+                    <label for="memberEmail">Email:</label>
+                    <input type="email" id="memberEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="memberRole">Role:</label>
+                    <select id="memberRole" required>
+                        <option value="Member">Member</option>
+                        <option value="Moderator">Moderator</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Add Member</button>
+            </form>
+        </div>
+
+        <!-- Members List -->
+        <h2>Current Members</h2>
+        <table class="members-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="membersList">
+                <!-- Dynamically populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Sample data (replace with real database/fetch)
+        let members = [
+            { id: 1, name: "John Doe", email: "john@club.com", role: "Admin" },
+            { id: 2, name: "Jane Smith", email: "jane@club.com", role: "Moderator" }
+        ];
+
+        // DOM Elements
+        const addMemberForm = document.getElementById('addMemberForm');
+        const membersList = document.getElementById('membersList');
+
+        // Render members table
+        function renderMembers() {
+            membersList.innerHTML = '';
+            members.forEach(member => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${member.id}</td>
+                    <td>${member.name}</td>
+                    <td>${member.email}</td>
+                    <td>${member.role}</td>
+                    <td>
+                        <button class="delete-btn" data-id="${member.id}">Delete</button>
+                    </td>
+                `;
+                membersList.appendChild(row);
+            });
+
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    deleteMember(id);
+                });
+            });
+        }
+
+        // Add new member
+        addMemberForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newMember = {
+                id: members.length + 1,
+                name: document.getElementById('memberName').value,
+                email: document.getElementById('memberEmail').value,
+                role: document.getElementById('memberRole').value
+            };
+
+            members.push(newMember);
+            renderMembers();
+            addMemberForm.reset();
+
+            alert('Member added successfully!');
+        });
+
+        // Delete member
+        function deleteMember(id) {
+            if (confirm('Are you sure you want to delete this member?')) {
+                members = members.filter(member => member.id !== id);
+                renderMembers();
+            }
+        }
+
+        // Initial render
+        renderMembers();
+    </script>
+</body>
+
+</html>
